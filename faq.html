@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - EliteStore Premium Electronics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+        <link rel="icon" type="image/x-icon" href="shot.png">
+
+    <style>
+        /* Все стили из основного файла остаются без изменений */
+        :root {
+            --primary: #0f172a;
+            --secondary: #7c3aed;
+            --accent: #ec4899;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --text: #334155;
+            --text-light: #64748b;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.07);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --gradient: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+            --gradient-dark: linear-gradient(135deg, #7c3aed 0%, #db2777 100%);
+            --gradient-light: linear-gradient(135deg, #a78bfa 0%, #f472b6 100%);
+            --gradient-card: linear-gradient(to bottom, rgba(255,255,255,0.95), rgba(255,255,255,0.98));
+            --sidebar-width: 320px;
+            --max-width: 1440px;
+            --border-radius: 16px;
+            --border-radius-lg: 20px;
+            --border-radius-xl: 28px;
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        body {
+            background-color: #f8fafc;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+            width: 100%;
+        }
+
+        /* Header */
+        header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .logo:hover {
+            color: var(--secondary);
+            transform: translateY(-1px);
+        }
+
+        .logo i {
+            color: var(--secondary);
+            margin-right: 12px;
+            font-size: 32px;
+            transition: var(--transition);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo:hover i {
+            transform: rotate(-15deg) scale(1.1);
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 32px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            outline: none;
+            transition: var(--transition);
+            background: rgba(248, 250, 252, 0.8);
+            box-shadow: var(--shadow-sm);
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .search-bar input:focus {
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2), var(--shadow-md);
+            background: white;
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 6px;
+            top: 6px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-bar button:hover {
+            transform: scale(1.05) rotate(5deg);
+            background: var(--gradient-dark);
+            box-shadow: var(--shadow-md);
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .user-actions a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 20px;
+            position: relative;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(248, 250, 252, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .user-actions a:hover {
+            color: var(--secondary);
+            background-color: rgba(124, 58, 237, 0.1);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .cart-count, .wishlist-count {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            border: 2px solid white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Promo Banner */
+        .promo-banner {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            padding: 14px;
+            font-size: 15px;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .promo-banner p {
+            position: relative;
+            z-index: 2;
+        }
+
+        .promo-banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+   /* Breadcrumb */
+        .breadcrumb {
+            padding: 40px 0 20px;
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+            color: var(--text-light);
+        }
+
+        .breadcrumb-nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumb-nav a:hover {
+            color: var(--secondary);
+        }
+
+        .breadcrumb-nav span {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+
+
+
+
+
+        /* FAQ Hero Section */
+        .faq-hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.95)), url('https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            color: white;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .faq-hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .faq-hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* FAQ Content */
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto 100px;
+        }
+
+        .faq-search {
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .faq-search input {
+            width: 100%;
+            padding: 20px 24px;
+            border: none;
+            border-radius: 16px;
+            font-size: 16px;
+            outline: none;
+            transition: var(--transition);
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            box-shadow: var(--shadow-md);
+            font-weight: 500;
+            padding-left: 60px;
+        }
+
+        .faq-search input:focus {
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2), var(--shadow-lg);
+        }
+
+        .faq-search i {
+            position: absolute;
+            left: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary);
+            font-size: 20px;
+        }
+
+        .faq-categories {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 40px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: none;
+        }
+
+        .faq-categories::-webkit-scrollbar {
+            display: none;
+        }
+
+        .faq-category {
+            padding: 16px 28px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-sm);
+            font-weight: 600;
+        }
+
+        .faq-category:hover, .faq-category.active {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .faq-section {
+            margin-bottom: 60px;
+        }
+
+        .faq-section-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 28px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .faq-section-title i {
+            color: var(--secondary);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .faq-item {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .faq-question {
+            padding: 28px;
+            cursor: pointer;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 18px;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            color: var(--secondary);
+        }
+
+        .faq-question span {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .faq-icon {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .faq-answer {
+            padding: 0 28px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 28px 28px;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .contact-promo {
+            background: var(--gradient);
+            color: white;
+            padding: 60px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-promo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80') center/cover;
+            opacity: 0.1;
+        }
+
+        .contact-promo h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .contact-promo p {
+            font-size: 18px;
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            opacity: 0.9;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            padding: 16px 32px;
+            background: white;
+            color: var(--secondary);
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+            z-index: 2;
+            box-shadow: var(--shadow-md);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 100px 0 0;
+            position: relative;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 56px;
+            margin-bottom: 70px;
+        }
+
+        .footer-column h3 {
+            font-size: 22px;
+            margin-bottom: 28px;
+            position: relative;
+            padding-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 3px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 16px;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 16px;
+            display: inline-block;
+            padding: 6px 0;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+            transform: translateX(8px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 18px;
+            margin-top: 28px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+            font-size: 20px;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 28px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            font-size: 15px;
+        }
+
+
+
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .faq-hero h1 {
+                font-size: 36px;
+            }
+            
+            .faq-hero p {
+                font-size: 16px;
+            }
+            
+            .faq-categories {
+                gap: 12px;
+            }
+            
+            .faq-category {
+                padding: 14px 20px;
+                font-size: 14px;
+            }
+            
+            .faq-question {
+                padding: 20px;
+                font-size: 16px;
+            }
+            
+            .contact-promo {
+                padding: 40px 24px;
+            }
+            
+            .contact-promo h2 {
+                font-size: 26px;
+            }
+            
+            .contact-promo p {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .faq-hero {
+                padding: 80px 0;
+            }
+            
+            .faq-hero h1 {
+                font-size: 32px;
+            }
+            
+            .faq-search input {
+                padding: 16px 20px 16px 50px;
+            }
+            
+            .faq-section-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="promo-banner">
+            <p>🔥 Summer Sale: Up to 50% off on selected items! Shop Now →</p>
+        </div>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-crown"></i>
+                EliteStore
+            </a>
+          
+            <div class="user-actions">
+                <a href="account.html"><i class="far fa-user"></i></a>
+                <a href="wishlist.html"><i class="far fa-heart"></i><span class="wishlist-count">0</span></a>
+                <a href="cart.html">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    <!-- Breadcrumb -->
+    <div class="container breadcrumb">
+        <nav class="breadcrumb-nav">
+            <a href="index.html">Home</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>Faq</span>
+        </nav>
+    </div>
+
+
+
+
+    <!-- FAQ Hero Section -->
+    <section class="faq-hero">
+        <div class="container">
+            <h1>Frequently Asked Questions</h1>
+            <p>Find answers to common questions about our products, services, and policies.</p>
+        </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <div class="container faq-container">
+        <div class="faq-search">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search for questions..." id="faq-search-input">
+        </div>
+
+        <div class="faq-categories">
+            <div class="faq-category active" data-category="all">All Questions</div>
+            <div class="faq-category" data-category="shipping">Shipping & Delivery</div>
+            <div class="faq-category" data-category="returns">Returns & Refunds</div>
+            <div class="faq-category" data-category="products">Products & Warranty</div>
+            <div class="faq-category" data-category="account">Account & Payment</div>
+            <div class="faq-category" data-category="technical">Technical Support</div>
+        </div>
+
+        <div class="faq-sections">
+            <!-- Shipping & Delivery -->
+            <div class="faq-section" data-category="shipping">
+                <h2 class="faq-section-title"><i class="fas fa-shipping-fast"></i> Shipping & Delivery</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How long does delivery take?</span>
+                        <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Standard delivery takes 3-5 business days for domestic orders. Express shipping options are available at checkout for delivery within 1-2 business days. International delivery times vary by location but typically take 7-14 business days.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What are your shipping rates?</span>
+                        <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer free standard shipping on all orders over $100. For orders under $100, standard shipping is $7.99. Express shipping is available for $19.99 regardless of order value. International shipping rates are calculated at checkout based on destination.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you ship internationally?</span>
+                        <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we ship to over 50 countries worldwide. International shipping rates and delivery times vary by destination. Please note that customers are responsible for any customs duties, taxes, or import fees that may apply in their country.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How can I track my order?</span>
+                        <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Once your order ships, you'll receive a confirmation email with a tracking number and link to track your package. You can also track your order by logging into your account and viewing your order history.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Returns & Refunds -->
+            <div class="faq-section" data-category="returns">
+                <h2 class="faq-section-title"><i class="fas fa-undo-alt"></i> Returns & Refunds</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What is your return policy?</span>
+                        <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer a 30-day return policy for all unused products in their original packaging with proof of purchase. Return shipping is free for domestic returns. Some products may have specific return conditions, which will be noted on the product page.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How long does it take to process a refund?</span>
+                        <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Once we receive your returned item, refunds are processed within 3-5 business days. The time it takes for the refund to appear in your account depends on your payment method and financial institution, but typically takes 5-10 business days.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I exchange a product?</span>
+                        <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we offer exchanges for a different size, color, or product. To initiate an exchange, please contact our customer service team or start a return from your account and select the exchange option. Exchanges are subject to product availability.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Products & Warranty -->
+            <div class="faq-section" data-category="products">
+                <h2 class="faq-section-title"><i class="fas fa-box-open"></i> Products & Warranty</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What warranty do your products come with?</span>
+                        <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Most of our products come with a manufacturer's warranty ranging from 1 to 3 years. The specific warranty period and terms are listed on each product page. Our premium Elite products come with an extended 3-year warranty that includes accidental damage protection.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Are your products authentic and new?</span>
+                        <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, all products sold on EliteStore are 100% authentic, brand new, and sourced directly from manufacturers or authorized distributors. We do not sell refurbished, used, or counterfeit products.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you offer product customization?</span>
+                        <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer limited customization options on select products, such as engraving or custom configurations. These options will be available during checkout if applicable to the product. For bulk orders or special requests, please contact our corporate sales team.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Account & Payment -->
+            <div class="faq-section" data-category="account">
+                <h2 class="faq-section-title"><i class="fas fa-user-circle"></i> Account & Payment</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What payment methods do you accept?</span>
+                        <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept all major credit cards (Visa, MasterCard, American Express, Discover), PayPal, Apple Pay, Google Pay, and Shop Pay. We also offer financing options through Affirm for qualifying orders over $250.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is my payment information secure?</span>
+                        <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we use industry-standard SSL encryption to protect your personal and payment information. We are PCI DSS compliant and never store your complete payment details on our servers. For added security, we recommend using PayPal or Apple Pay.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I create an account?</span>
+                        <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can create an account during checkout or by clicking the "Account" icon in the header. Creating an account allows you to track orders, save your payment methods for faster checkout, create wishlists, and receive exclusive offers.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Technical Support -->
+            <div class="faq-section" data-category="technical">
+                <h2 class="faq-section-title"><i class="fas fa-headset"></i> Technical Support</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I get technical support for my product?</span>
+                        <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer comprehensive technical support for all products purchased from EliteStore. You can contact our support team via phone at 1-800-ELITE-HELP, email at support@elitestore.com, or live chat during business hours. Many products also include dedicated manufacturer support.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Where can I find product manuals and documentation?</span>
+                        <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Product manuals, specifications, and documentation are available on each product page under the "Downloads" section. You can also access these materials from your account if you've purchased the product. If you need additional documentation, please contact our support team.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you offer setup assistance?</span>
+                        <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we offer complimentary basic setup guidance for all products. For complex installations, we offer premium setup services at an additional cost. Please contact our support team to learn more about our setup assistance options.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-promo">
+            <h2>Still have questions?</h2>
+            <p>Our customer support team is here to help you with any additional questions or concerns you may have.</p>
+            <a href="contact.html" class="contact-btn">Contact Support</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-column">
+                <h3>EliteStore</h3>
+                <p>Your one-stop destination for premium quality electronics.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Customer Service</h3>
+                <ul class="footer-links">
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Account</h3>
+                <ul class="footer-links">
+                    <li><a href="account.html">My Account</a></li>
+                    <li><a href="orderhistory.html">Order History</a></li>
+               
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2025 EliteStore. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ accordion functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+            
+            // FAQ category filtering
+            const faqCategories = document.querySelectorAll('.faq-category');
+            const faqSections = document.querySelectorAll('.faq-section');
+            
+            faqCategories.forEach(category => {
+                category.addEventListener('click', () => {
+                    // Update active category
+                    faqCategories.forEach(cat => cat.classList.remove('active'));
+                    category.classList.add('active');
+                    
+                    const categoryName = category.getAttribute('data-category');
+                    
+                    // Show/hide relevant sections
+                    faqSections.forEach(section => {
+                        if (categoryName === 'all' || section.getAttribute('data-category') === categoryName) {
+                            section.style.display = 'block';
+                        } else {
+                            section.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // FAQ search functionality
+            const searchInput = document.getElementById('faq-search-input');
+            
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                
+                if (searchTerm.length < 2) {
+                    // If search term is too short, show all questions
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        item.style.display = 'flex';
+                    });
+                    return;
+                }
+                
+                // Filter questions based on search term
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    const question = item.querySelector('.faq-question span').textContent.toLowerCase();
+                    const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                    
+                    if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                        item.style.display = 'flex';
+                        // Expand matching items
+                        item.classList.add('active');
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

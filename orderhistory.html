@@ -1,0 +1,898 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History - EliteStore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+        <link rel="icon" type="image/x-icon" href="shot.png">
+
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #7c3aed;
+            --accent: #ec4899;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --text: #334155;
+            --text-light: #64748b;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.07);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --gradient: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+            --gradient-dark: linear-gradient(135deg, #7c3aed 0%, #db2777 100%);
+            --gradient-card: linear-gradient(to bottom, rgba(255,255,255,0.95), rgba(255,255,255,0.98));
+            --border-radius: 16px;
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        body {
+            background-color: #f8fafc;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            width: 100%;
+        }
+
+        /* Header */
+        header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--secondary);
+            margin-right: 12px;
+            font-size: 32px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-btn {
+            background: var(--gradient);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 60px 0;
+            min-height: 70vh;
+        }
+
+        .order-history-page {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-header h1 {
+            font-size: 42px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .page-header p {
+            color: var(--text-light);
+            font-size: 18px;
+        }
+
+        .orders-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--glass-border);
+        }
+
+        .order-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(241, 245, 249, 0.8);
+            transition: var(--transition);
+        }
+
+        .order-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(241, 245, 249, 0.8);
+        }
+
+        .order-id {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .order-date {
+            color: var(--text-light);
+            font-size: 16px;
+        }
+
+        .order-status {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .status-delivered {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .status-shipped {
+            background: rgba(124, 58, 237, 0.1);
+            color: var(--secondary);
+        }
+
+        .status-processing {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+
+        .status-cancelled {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+
+        .order-items {
+            margin-bottom: 20px;
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(241, 245, 249, 0.5);
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-right: 20px;
+        }
+
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .item-price {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .item-quantity {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .order-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 2px solid rgba(241, 245, 249, 0.8);
+        }
+
+        .order-total {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-state i {
+            font-size: 80px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .empty-state p {
+            color: var(--text-light);
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--glass-border);
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .filter-group select,
+        .filter-group input {
+            padding: 12px;
+            border: 2px solid rgba(226, 232, 240, 0.8);
+            border-radius: 8px;
+            background: white;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 60px 0 20px;
+            margin-top: 80px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .order-summary {
+                flex-direction: column;
+                gap: 20px;
+                align-items: flex-start;
+            }
+            
+            .order-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .orders-container {
+                padding: 20px;
+            }
+            
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-crown"></i>
+                EliteStore
+            </a>
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Store
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container order-history-page">
+            <div class="page-header">
+                <h1><i class="fas fa-history"></i> Order History</h1>
+                <p>View and manage your purchase history</p>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label for="status-filter">Status</label>
+                        <select id="status-filter">
+                            <option value="all">All Statuses</option>
+                            <option value="processing">Processing</option>
+                            <option value="shipped">Shipped</option>
+                            <option value="delivered">Delivered</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="date-filter">Date Range</label>
+                        <select id="date-filter">
+                            <option value="all">All Time</option>
+                            <option value="30">Last 30 Days</option>
+                            <option value="90">Last 90 Days</option>
+                            <option value="365">Last Year</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="sort-filter">Sort By</label>
+                        <select id="sort-filter">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="price-high">Total: High to Low</option>
+                            <option value="price-low">Total: Low to High</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="orders-container" id="orders-container">
+                <!-- Orders will be loaded here dynamically -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Order Details Modal -->
+    <div class="modal" id="order-details-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Order Details</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div id="modal-order-details">
+                <!-- Order details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-column">
+                <h3>EliteStore</h3>
+                <p>Your one-stop destination for premium quality electronics.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html">Shop</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Customer Service</h3>
+                <ul class="footer-links">
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Account</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">My Account</a></li>
+                    <li><a href="orderhistory.html">Order History</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2025 EliteStore. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Product database (same as in your main site)
+        const products = {
+            1: { name: "Elite Pro Wireless Headphones", image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" },
+            2: { name: "Premium Noise Cancelling Earbuds", image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" },
+            3: { name: "Ultra HD Smartphone Pro", image: "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" },
+            4: { name: "Professional Noise Cancelling Headphones", image: "https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwa90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" },
+            5: { name: "Compact Bluetooth Speaker", image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" },
+            6: { name: "EliteBook Pro Laptop", image: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" },
+            7: { name: "Wireless Charging Pad", image: "https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" },
+            8: { name: "Smart Fitness Tracker", image: "https://images.unsplash.com/photo-1585123334904-845d60e97b29?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" }
+        };
+
+        // Load orders from localStorage or use sample data
+        function getOrders() {
+            const savedOrders = localStorage.getItem('elitestore_orders');
+            if (savedOrders) {
+                return JSON.parse(savedOrders);
+            }
+            
+            // Sample orders if none exist
+            return [
+                {
+                    id: "EL-" + Date.now().toString().slice(-6),
+                    date: new Date().toISOString().split('T')[0],
+                    status: "processing",
+                    items: [
+                        { productId: 1, quantity: 1, price: 299 },
+                        { productId: 3, quantity: 1, price: 45 }
+                    ],
+                    total: 344,
+                    shippingAddress: {
+                        name: "John Doe",
+                        street: "123 Main St",
+                        city: "New York",
+                        state: "NY",
+                        zip: "10001",
+                        country: "USA"
+                    },
+                    paymentMethod: "Credit Card"
+                }
+            ];
+        }
+
+        // Load orders on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadOrders();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Filter event listeners
+            document.getElementById('status-filter').addEventListener('change', loadOrders);
+            document.getElementById('date-filter').addEventListener('change', loadOrders);
+            document.getElementById('sort-filter').addEventListener('change', loadOrders);
+
+            // Modal close
+            document.querySelector('.close-modal').addEventListener('click', function() {
+                document.getElementById('order-details-modal').style.display = 'none';
+            });
+
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === document.getElementById('order-details-modal')) {
+                    document.getElementById('order-details-modal').style.display = 'none';
+                }
+            });
+        }
+
+        function loadOrders() {
+            const ordersContainer = document.getElementById('orders-container');
+            let orders = getOrders();
+            
+            // Apply filters
+            const statusFilter = document.getElementById('status-filter').value;
+            const dateFilter = document.getElementById('date-filter').value;
+            const sortFilter = document.getElementById('sort-filter').value;
+
+            if (statusFilter !== 'all') {
+                orders = orders.filter(order => order.status === statusFilter);
+            }
+
+            if (dateFilter !== 'all') {
+                const days = parseInt(dateFilter);
+                const cutoffDate = new Date();
+                cutoffDate.setDate(cutoffDate.getDate() - days);
+                
+                orders = orders.filter(order => {
+                    const orderDate = new Date(order.date);
+                    return orderDate >= cutoffDate;
+                });
+            }
+
+            // Apply sorting
+            switch(sortFilter) {
+                case 'oldest':
+                    orders.sort((a, b) => new Date(a.date) - new Date(b.date));
+                    break;
+                case 'price-high':
+                    orders.sort((a, b) => b.total - a.total);
+                    break;
+                case 'price-low':
+                    orders.sort((a, b) => a.total - b.total);
+                    break;
+                default:
+                    orders.sort((a, b) => new Date(b.date) - new Date(a.date));
+            }
+
+            if (orders.length === 0) {
+                ordersContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-shopping-bag"></i>
+                        <h3>No orders found</h3>
+                        <p>No orders match your current filters</p>
+                        <button class="btn btn-primary" onclick="resetFilters()">
+                            <i class="fas fa-filter"></i> Reset Filters
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            ordersContainer.innerHTML = orders.map(order => `
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Order #${order.id}</div>
+                            <div class="order-date">Placed on ${new Date(order.date).toLocaleDateString()}</div>
+                        </div>
+                        <div class="order-status status-${order.status}">
+                            ${order.status.charAt(0).toUpperCase() + order.status.slice(1)}
+                        </div>
+                    </div>
+
+                    <div class="order-items">
+                        ${order.items.map(item => {
+                            const product = products[item.productId];
+                            return `
+                                <div class="order-item">
+                                    <div class="item-image">
+                                        <img src="${product.image}" alt="${product.name}">
+                                    </div>
+                                    <div class="item-details">
+                                        <div class="item-name">${product.name}</div>
+                                        <div class="item-price">$${item.price} × ${item.quantity}</div>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+
+                    <div class="order-summary">
+                        <div class="order-total">Total: $${order.total.toFixed(2)}</div>
+                        <div class="order-actions">
+                            <button class="btn btn-outline" onclick="viewOrderDetails('${order.id}')">
+                                <i class="fas fa-eye"></i> View Details
+                            </button>
+                            <button class="btn btn-primary" onclick="reorder('${order.id}')">
+                                <i class="fas fa-shopping-cart"></i> Buy Again
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function viewOrderDetails(orderId) {
+            const orders = getOrders();
+            const order = orders.find(o => o.id === orderId);
+            
+            if (!order) return;
+
+            const modalContent = document.getElementById('modal-order-details');
+            modalContent.innerHTML = `
+                <div class="order-details">
+                    <div class="detail-group">
+                        <h3>Order Information</h3>
+                        <p><strong>Order ID:</strong> ${order.id}</p>
+                        <p><strong>Order Date:</strong> ${new Date(order.date).toLocaleDateString()}</p>
+                        <p><strong>Status:</strong> <span class="order-status status-${order.status}">${order.status.charAt(0).toUpperCase() + order.status.slice(1)}</span></p>
+                        <p><strong>Payment Method:</strong> ${order.paymentMethod}</p>
+                    </div>
+
+                    <div class="detail-group">
+                        <h3>Shipping Address</h3>
+                        <p>${order.shippingAddress.name}<br>
+                        ${order.shippingAddress.street}<br>
+                        ${order.shippingAddress.city}, ${order.shippingAddress.state} ${order.shippingAddress.zip}<br>
+                        ${order.shippingAddress.country}</p>
+                    </div>
+
+                    <div class="detail-group">
+                        <h3>Order Items</h3>
+                        ${order.items.map(item => {
+                            const product = products[item.productId];
+                            return `
+                                <div class="order-item-detail">
+                                    <img src="${product.image}" alt="${product.name}" width="50">
+                                    <div>
+                                        <strong>${product.name}</strong><br>
+                                        Quantity: ${item.quantity} × $${item.price}
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+
+                    <div class="detail-group">
+                        <h3>Order Total: $${order.total.toFixed(2)}</h3>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('order-details-modal').style.display = 'flex';
+        }
+
+        function reorder(orderId) {
+            const orders = getOrders();
+            const order = orders.find(o => o.id === orderId);
+            
+            if (!order) return;
+
+            // Add items to cart (simulate this)
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            order.items.forEach(item => {
+                const existingItem = cart.find(cartItem => cartItem.id === item.productId);
+                if (existingItem) {
+                    existingItem.quantity += item.quantity;
+                } else {
+                    const product = products[item.productId];
+                    cart.push({
+                        id: item.productId,
+                        title: product.name,
+                        price: item.price,
+                        image: product.image,
+                        quantity: item.quantity
+                    });
+                }
+            });
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            alert('Items have been added to your cart!');
+            // Redirect to cart page
+            window.location.href = 'index.html#cart';
+        }
+
+        function resetFilters() {
+            document.getElementById('status-filter').value = 'all';
+            document.getElementById('date-filter').value = 'all';
+            document.getElementById('sort-filter').value = 'newest';
+            loadOrders();
+        }
+
+        // Simulate order creation (for demo purposes)
+        function createSampleOrder() {
+            const orders = getOrders();
+            const newOrder = {
+                id: "EL-" + Date.now().toString().slice(-6),
+                date: new Date().toISOString().split('T')[0],
+                status: "processing",
+                items: [
+                    { productId: Math.floor(Math.random() * 8) + 1, quantity: 1, price: Math.floor(Math.random() * 500) + 50 },
+                    { productId: Math.floor(Math.random() * 8) + 1, quantity: 1, price: Math.floor(Math.random() * 300) + 30 }
+                ],
+                total: 0,
+                shippingAddress: {
+                    name: "Demo User",
+                    street: "456 Demo St",
+                    city: "Demo City",
+                    state: "DC",
+                    zip: "12345",
+                    country: "USA"
+                },
+                paymentMethod: "Credit Card"
+            };
+
+            newOrder.total = newOrder.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            orders.unshift(newOrder);
+            localStorage.setItem('elitestore_orders', JSON.stringify(orders));
+            loadOrders();
+        }
+    </script>
+</body>
+</html>
